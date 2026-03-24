@@ -1,0 +1,22 @@
+{
+  "name": "tech-blog",
+  "version": "1.0.0",
+  "description": "个人技术博客 - Spring Boot / 前端 / 后端 / Linux",
+  "scripts": {
+    "dev": "vitepress dev docs",
+    "build": "vitepress build docs",
+    "preview": "vitepress preview docs"
+  },
+  "keywords": [
+    "blog",
+    "tech",
+    "spring-boot",
+    "frontend"
+  ],
+  "author": "yangshuyin98",
+  "license": "MIT",
+  "dependencies": {
+    "vitepress": "^1.6.4",
+    "vue": "^3.5.30"
+  }
+}
