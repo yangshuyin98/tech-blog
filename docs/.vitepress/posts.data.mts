@@ -7,6 +7,7 @@ export interface Post {
   category: string
   tags: string[]
   readTime: string
+  order: number
 }
 
 export declare const data: Post[]
@@ -28,7 +29,13 @@ export default createContentLoader('posts/**/*.md', {
         category: frontmatter.category || '',
         tags: frontmatter.tags || [],
         readTime: frontmatter.readTime || '',
+        order: frontmatter.order ?? 999,
       }))
-      .sort((a, b) => b.date.localeCompare(a.date))
+      .sort((a, b) => {
+        // 先按 order 升序（order 越小越前）
+        if (a.order !== b.order) return a.order - b.order
+        // order 相同或都是 999，按日期降序（新文章在前）
+        return b.date.localeCompare(a.date)
+      })
   },
 })

@@ -12,6 +12,7 @@ const categoryMap: Record<string, string> = {
   vue: 'Vue',
   backend: '后端',
   linux: 'Linux',
+  centos: 'CentOS',
   database: '数据库',
   devops: 'DevOps',
   arch: '架构',
@@ -58,7 +59,10 @@ const grouped = computed(() => {
       name: categoryMap[cat],
       posts: posts
         .filter(p => p.category === cat)
-        .sort((a, b) => b.date.localeCompare(a.date)),
+        .sort((a, b) => {
+          if (a.order !== b.order) return a.order - b.order
+          return b.date.localeCompare(a.date)
+        }),
     }))
 })
 </script>

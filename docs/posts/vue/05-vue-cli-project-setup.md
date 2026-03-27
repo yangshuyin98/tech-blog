@@ -1,9 +1,10 @@
 ---
-title: 'Vue CLI 工程化入门：从零搭建 Vue 项目'
+title: '[05] Vue CLI 工程化入门：从零搭建 Vue 项目'
 category: vue
 tags: ['Vue CLI', '工程化', 'Webpack']
-date: 2026-03-27
+date: 2026-03-18
 readTime: '12 min'
+order: 5
 ---
 
 ## 为什么需要工程化？

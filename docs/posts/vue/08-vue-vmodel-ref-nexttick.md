@@ -1,9 +1,10 @@
 ---
-title: 'Vue 深入：v-model 原理、ref/$refs 与 $nextTick'
+title: '[08] Vue 深入：v-model 原理、ref/$refs 与 $nextTick'
 category: vue
 tags: ['Vue', 'v-model', 'ref', '$nextTick']
-date: 2026-03-24
+date: 2026-03-21
 readTime: '14 min'
+order: 8
 ---
 
 ## v-model 的本质

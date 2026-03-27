@@ -1,9 +1,10 @@
 ---
-title: 'Vue 组件化开发：从根组件到局部注册'
+title: '[06] Vue 组件化开发：从根组件到局部注册'
 category: vue
 tags: ['Vue', '组件', 'Component']
-date: 2026-03-26
+date: 2026-03-19
 readTime: '15 min'
+order: 6
 ---
 
 ## 什么是组件化？

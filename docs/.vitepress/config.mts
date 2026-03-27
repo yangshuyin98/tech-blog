@@ -24,6 +24,7 @@ export default defineConfig({
           { text: 'Vue', link: '/posts/?cat=vue' },
           { text: '后端', link: '/posts/?cat=backend' },
           { text: 'Linux', link: '/posts/?cat=linux' },
+          { text: 'CentOS', link: '/posts/?cat=centos' },
           { text: '数据库', link: '/posts/?cat=database' },
           { text: 'DevOps', link: '/posts/?cat=devops' },
           { text: '架构', link: '/posts/?cat=arch' },

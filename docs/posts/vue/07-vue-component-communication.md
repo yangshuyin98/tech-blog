@@ -1,9 +1,10 @@
 ---
-title: 'Vue 组件通信：Props、Events 与 Scoped 样式'
+title: '[07] Vue 组件通信：Props、Events 与 Scoped 样式'
 category: vue
 tags: ['Vue', '组件通信', 'Props', 'Scoped']
-date: 2026-03-25
+date: 2026-03-20
 readTime: '16 min'
+order: 7
 ---
 
 ## 为什么需要组件通信？
