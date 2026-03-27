@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { ref, computed, onMounted, watch, nextTick } from 'vue'
 import { useRoute } from 'vitepress'
 import { data as posts } from '../../posts.data'
 
@@ -9,6 +9,7 @@ const categoryMap: Record<string, string> = {
   springboot: 'Spring Boot',
   springmvc: 'Spring MVC',
   frontend: '前端',
+  vue: 'Vue',
   backend: '后端',
   linux: 'Linux',
   database: '数据库',
@@ -18,27 +19,36 @@ const categoryMap: Record<string, string> = {
 
 const categoryOrder = Object.keys(categoryMap)
 
-// 当前分类（从 URL 参数读取）
-const currentCat = computed(() => {
-  const params = new URLSearchParams(route.query as Record<string, string>)
-  return params.get('cat') || ''
+const currentCat = ref('')
+
+function updateCat() {
+  // 从 URL 直接读取，最可靠
+  const params = new URLSearchParams(window.location.search)
+  currentCat.value = params.get('cat') || ''
+}
+
+onMounted(() => {
+  updateCat()
+  // 监听浏览器前进/后退
+  window.addEventListener('popstate', updateCat)
+  // VitePress SPA 导航：监听 route.query 变化
+  watch(
+    () => route.query,
+    () => nextTick(updateCat)
+  )
 })
 
-// 是否有分类筛选
 const hasFilter = computed(() => !!currentCat.value)
 
-// 筛选后的文章
 const filteredPosts = computed(() => {
   if (!hasFilter.value) return posts
   return posts.filter(p => p.category === currentCat.value)
 })
 
-// 当前分类的中文名
 const currentCatName = computed(() => {
   return categoryMap[currentCat.value] || ''
 })
 
-// 按分类分组（全部文章时）
 const grouped = computed(() => {
   if (hasFilter.value) return []
   return categoryOrder
@@ -55,7 +65,6 @@ const grouped = computed(() => {
 
 <template>
   <div class="post-list">
-    <!-- 按分类筛选模式 -->
     <template v-if="hasFilter">
       <h1>{{ currentCatName }} <Badge type="info" :text="`${filteredPosts.length} 篇`" /></h1>
       <ul>
@@ -66,7 +75,6 @@ const grouped = computed(() => {
       </ul>
     </template>
 
-    <!-- 全部文章模式 -->
     <template v-else>
       <h1>全部文章 <Badge type="info" :text="`${posts.length} 篇`" /></h1>
       <div v-for="group in grouped" :key="group.key" class="category-group">
@@ -83,44 +91,12 @@ const grouped = computed(() => {
 </template>
 
 <style scoped>
-.post-list h1 {
-  margin-bottom: 1.5rem;
-}
-
-.category-group {
-  margin-bottom: 2rem;
-}
-
-.category-group h2 {
-  border-bottom: 1px solid var(--vp-c-divider);
-  padding-bottom: 0.5rem;
-}
-
-.post-list ul {
-  list-style: none;
-  padding: 0;
-}
-
-.post-list li {
-  padding: 0.4rem 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 1rem;
-}
-
-.post-list li a {
-  flex: 1;
-  font-weight: 500;
-}
-
-.post-list li a:hover {
-  color: var(--vp-c-brand-1);
-}
-
-.date {
-  font-size: 0.85rem;
-  color: var(--vp-c-text-3);
-  white-space: nowrap;
-}
+.post-list h1 { margin-bottom: 1.5rem; }
+.category-group { margin-bottom: 2rem; }
+.category-group h2 { border-bottom: 1px solid var(--vp-c-divider); padding-bottom: 0.5rem; }
+.post-list ul { list-style: none; padding: 0; }
+.post-list li { padding: 0.4rem 0; display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+.post-list li a { flex: 1; font-weight: 500; }
+.post-list li a:hover { color: var(--vp-c-brand-1); }
+.date { font-size: 0.85rem; color: var(--vp-c-text-3); white-space: nowrap; }
 </style>

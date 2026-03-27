@@ -21,6 +21,7 @@ export default defineConfig({
           { text: 'Spring Boot', link: '/posts/?cat=springboot' },
           { text: 'Spring MVC', link: '/posts/?cat=springmvc' },
           { text: '前端', link: '/posts/?cat=frontend' },
+          { text: 'Vue', link: '/posts/?cat=vue' },
           { text: '后端', link: '/posts/?cat=backend' },
           { text: 'Linux', link: '/posts/?cat=linux' },
           { text: '数据库', link: '/posts/?cat=database' },

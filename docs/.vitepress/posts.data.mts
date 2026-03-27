@@ -17,10 +17,10 @@ function toString(val: unknown): string {
   return String(val)
 }
 
-export default createContentLoader('posts/*.md', {
+export default createContentLoader('posts/**/*.md', {
   transform(raw): Post[] {
     return raw
-      .filter(({ url }) => url !== '/posts/')
+      .filter(({ url }) => !url.endsWith('/'))
       .map(({ url, frontmatter }) => ({
         title: frontmatter.title || '未命名',
         url,
