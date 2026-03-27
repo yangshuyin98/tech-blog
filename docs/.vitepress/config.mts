@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress'
 
 export default defineConfig({
   title: '技术博客',
-  description: 'Spring Boot / 前端 / 后端 / Linux 技术分享',
+  description: 'Spring Boot / Spring MVC / 前端 / 后端 / Linux 技术分享',
   lang: 'zh-CN',
 
   head: [
@@ -19,6 +19,7 @@ export default defineConfig({
         text: '分类',
         items: [
           { text: 'Spring Boot', link: '/posts/?cat=springboot' },
+          { text: 'Spring MVC', link: '/posts/?cat=springmvc' },
           { text: '前端', link: '/posts/?cat=frontend' },
           { text: '后端', link: '/posts/?cat=backend' },
           { text: 'Linux', link: '/posts/?cat=linux' },

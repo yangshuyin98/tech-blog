@@ -17,6 +17,9 @@ features:
   - icon: ☕
     title: Spring Boot
     details: 虚拟线程、Spring Security、GraalVM 原生编译等企业级 Java 实践
+  - icon: 🌐
+    title: Spring MVC
+    details: 请求流程源码解析、统一异常处理、拦截器与过滤器深度对比
   - icon: 🎨
     title: 前端
     details: React RSC、TypeScript 5.4、Vite 6.0、浏览器渲染原理
