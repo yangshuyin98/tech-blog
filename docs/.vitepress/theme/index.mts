@@ -7,6 +7,7 @@ import SpringbootList from './components/SpringbootList.vue'
 import JavaList from './components/JavaList.vue'
 import DatabaseList from './components/DatabaseList.vue'
 import DevopsList from './components/DevopsList.vue'
+import './custom.css'
 
 const theme: Theme = {
   extends: DefaultTheme,

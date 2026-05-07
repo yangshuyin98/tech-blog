@@ -1,0 +1,577 @@
+/* ============================================
+ * 技术博客自定义样式
+ * 亮色：纸质风格 | 暗色：海洋风格
+ * ============================================ */
+
+/* ============================================
+ * 字体配置
+ * 优先使用京華老宋体，回退到系统宋体
+ * 如需使用京華老宋体，请将字体文件放在 public/fonts/京華老宋体v3.0.ttf
+ * ============================================ */
+
+@font-face {
+  font-family: '京華老宋体';
+  src: url('/fonts/京華老宋体v3.0.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ============================================
+ * 亮色模式 - 纸质风格
+ * ============================================ */
+
+:root {
+  /* 字体 - 优先京華老宋体，回退到系统宋体 */
+  --vp-font-family-base: '京華老宋体', 'Noto Serif SC', 'Source Han Serif SC',
+    'SimSun', '宋体', 'PingFang SC', 'Microsoft YaHei', serif;
+  --vp-font-family-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code',
+    Menlo, Monaco, Consolas, monospace;
+
+  /* 纸质背景色 */
+  --vp-c-bg: #f8f5ef;
+  --vp-c-bg-soft: #f0ebe3;
+  --vp-c-bg-mute: #e8e3db;
+
+  /* 文字颜色 - 深棕色 */
+  --vp-c-text-1: #2c2416;
+  --vp-c-text-2: #5a4e3c;
+  --vp-c-text-3: #8a7e6c;
+
+  /* 品牌色 - 古铜色 */
+  --vp-c-brand-1: #8b6914;
+  --vp-c-brand-2: #a07d1a;
+  --vp-c-brand-3: #b59120;
+
+  /* 分隔线 */
+  --vp-c-divider: #d4cfc5;
+  --vp-c-divider-light: #e0dbd1;
+
+  /* 代码块背景 */
+  --vp-code-block-bg: #dada27;
+  --vp-code-line-num-color: #888;
+
+  /* 侧边栏和导航栏 */
+  --vp-sidebar-bg-color: #f0ebe3;
+  --vp-nav-bg-color: #f8f5ef;
+}
+
+/* 纸质背景效果 - 全部组合 */
+body {
+  background-color: var(--vp-c-bg);
+  background-image:
+    /* 横线 - 间隔50px */
+    repeating-linear-gradient(0deg,
+      transparent,
+      transparent 78px,
+      rgba(0, 0, 0, 0.05) 78px,
+      rgba(0, 0, 0, 0.05) 80px),
+    /* 斜线水印 */
+    repeating-linear-gradient(45deg,
+      transparent,
+      transparent 200px,
+      rgba(0, 0, 0, 0.02) 200px,
+      rgba(0, 0, 0, 0.02) 201px),
+    repeating-linear-gradient(-45deg,
+      transparent,
+      transparent 200px,
+      rgba(0, 0, 0, 0.02) 200px,
+      rgba(0, 0, 0, 0.02) 201px),
+    /* 纹理 */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='%23f8f5ef'/%3E%3Crect width='1' height='1' fill='%23f0ebe3'/%3E%3C/svg%3E");
+}
+
+/* 文章内容 - 纸质排版 */
+.vp-doc {
+  line-height: 2;
+  letter-spacing: 0.05em;
+  word-spacing: 0.1em;
+  text-align: justify;
+}
+
+/* 标题 - 毛笔风格 */
+.vp-doc h1 {
+  font-size: 2rem;
+  font-weight: 900;
+  margin-top: 2.5rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 3px double var(--vp-c-brand-1);
+  letter-spacing: 0.1em;
+}
+
+.vp-doc h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--vp-c-divider);
+  letter-spacing: 0.08em;
+}
+
+.vp-doc h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  letter-spacing: 0.05em;
+}
+
+/* 段落 - 首行缩进 */
+.vp-doc p {
+  margin-bottom: 1.2rem;
+  text-indent: 2em;
+}
+
+/* 标题后不缩进 */
+.vp-doc h1+p,
+.vp-doc h2+p,
+.vp-doc h3+p,
+.vp-doc h4+p,
+.vp-doc li>p {
+  text-indent: 0;
+}
+
+/* 链接 */
+.vp-doc a {
+  color: var(--vp-c-brand-1);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--vp-c-brand-1);
+  transition: all 0.2s;
+}
+
+.vp-doc a:hover {
+  border-bottom-style: solid;
+  color: var(--vp-c-brand-2);
+}
+
+/* 代码块 */
+.vp-doc div[class*='language-'] {
+  border-radius: 4px;
+  border: 1px solid var(--vp-c-divider);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin: 1.5rem 0;
+}
+
+/* 行内代码 */
+.vp-doc :not(pre)>code {
+  background: var(--vp-c-bg-mute);
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-size: 0.9em;
+  color: #c7254e;
+}
+
+/* 表格 */
+.vp-doc table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+.vp-doc th {
+  background: var(--vp-c-bg-mute);
+  font-weight: 600;
+  text-align: left;
+  border-bottom: 2px solid var(--vp-c-brand-1);
+}
+
+.vp-doc th,
+.vp-doc td {
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--vp-c-divider);
+}
+
+.vp-doc tr:nth-child(even) {
+  background: var(--vp-c-bg-soft);
+}
+
+/* 引用块 */
+.vp-doc blockquote {
+  border-left: 4px solid var(--vp-c-brand-1);
+  background: var(--vp-c-bg-soft);
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 0 4px 4px 0;
+}
+
+/* 列表 */
+.vp-doc ul,
+.vp-doc ol {
+  padding-left: 2rem;
+  margin-bottom: 1.2rem;
+}
+
+.vp-doc li {
+  margin-bottom: 0.6rem;
+}
+
+/* 图片 - 相框效果 */
+.vp-doc img {
+  border-radius: 2px;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.1),
+    0 4px 12px rgba(0, 0, 0, 0.15);
+  margin: 1.5rem auto;
+  display: block;
+}
+
+/* 侧边栏 */
+.VPSidebar {
+  font-size: 0.9rem;
+  border-right: 1px solid var(--vp-c-divider);
+}
+
+.VPSidebar .group .title {
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+/* 导航栏 */
+.VPNavBar {
+  border-bottom: 1px solid var(--vp-c-divider);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.VPNavBar .title {
+  font-weight: 900;
+  font-size: 1.2rem;
+  letter-spacing: 0.1em;
+}
+
+/* 搜索框 */
+.VPLocalSearchBox {
+  border-radius: 4px;
+}
+
+/* ============================================
+ * 暗色模式 - 深海风格
+ * 协调的深海配色，呼应纸质风格的层次感
+ * ============================================ */
+
+.dark {
+  /* 深海背景色 - 由深到浅的三层 */
+  --vp-c-bg: #0c1e36;
+  --vp-c-bg-soft: #122a48;
+  --vp-c-bg-mute: #1a3558;
+
+  /* 海洋文字色 - 柔和的蓝灰 */
+  --vp-c-text-1: #d8e8f5;
+  --vp-c-text-2: #a8c5db;
+  --vp-c-text-3: #7a9fba;
+
+  /* 海洋品牌色 - 珊瑚暖色点缀 */
+  --vp-c-brand-1: #d4915e;
+  --vp-c-brand-2: #e0a575;
+  --vp-c-brand-3: #ecb98c;
+
+  /* 海洋分隔线 */
+  --vp-c-divider: #1e3a5c;
+  --vp-c-divider-light: #162e4a;
+
+  /* 代码块 */
+  --vp-code-block-bg: #0a1a30;
+  --vp-code-line-num-color: #4a7a9a;
+
+  /* 侧边栏和导航栏 */
+  --vp-sidebar-bg-color: #0e2440;
+  --vp-nav-bg-color: #0c1e36;
+}
+
+/* 深海背景渐变 - 由深到浅 */
+.dark body {
+  background-color: #0c1e36;
+  background-image:
+    /* 海面光线效果 */
+    linear-gradient(180deg,
+      #0a1830 0%,
+      #0e2440 30%,
+      #122a48 60%,
+      #0e2440 100%),
+    /* 细微波浪纹理 */
+    repeating-linear-gradient(0deg,
+      transparent,
+      transparent 60px,
+      rgba(30, 80, 140, 0.08) 60px,
+      rgba(30, 80, 140, 0.08) 62px),
+    /* 斜向水流纹理 */
+    repeating-linear-gradient(135deg,
+      transparent,
+      transparent 120px,
+      rgba(30, 80, 140, 0.04) 120px,
+      rgba(30, 80, 140, 0.04) 121px);
+}
+
+/* 深海模式 - 首页背景透明 */
+.dark .VPHome,
+.dark .VPHomeHero,
+.dark .VPFeatures,
+.dark main,
+.dark .VPContent,
+.dark .VPContentContainer,
+.dark .Layout,
+.dark .VPNav,
+.dark .VPNavBar,
+.dark .VPNavBarTitle,
+.dark .VPFlyout,
+.dark .VPMenu,
+.dark .VPMenuGroup,
+.dark .VPMenuLink,
+.dark .VPSidebar,
+.dark .VPSidebarGroup,
+.dark .VPDoc,
+.dark .VPDocFooter,
+.dark .VPFooter {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* 强制覆盖首页子元素 */
+.dark .VPHome * {
+  background-color: transparent !important;
+}
+
+/* 深海模式 - 特性卡片 */
+.dark .VPFeature {
+  background: #122a48 !important;
+  border-color: #1e3a5c;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dark .VPFeature:hover {
+  background: #1a3558 !important;
+  border-color: #2a5080;
+}
+
+/* 深海模式 - 首页变量 */
+.dark {
+  --vp-home-hero-background: transparent;
+  --vp-home-hero-name-color: #d4915e;
+  --vp-home-hero-text-color: #d8e8f5;
+  --vp-home-hero-tagline-color: #a8c5db;
+}
+
+/* 深海模式 - 代码块 */
+.dark .vp-doc div[class*='language-'] {
+  background: #081828;
+  border-color: #1a3050;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.dark .vp-doc div[class*='language-'] code,
+.dark .vp-doc div[class*='language-'] pre {
+  color: #d0dde8;
+}
+
+/* 深海模式 - 行内代码 */
+.dark .vp-doc :not(pre)>code {
+  background: #0e2440;
+  color: #6db3d8;
+}
+
+/* 深海模式 - 标题 */
+.dark .vp-doc h1 {
+  border-bottom-color: #d4915e;
+}
+
+.dark .vp-doc h2 {
+  border-bottom-color: #1e3a5c;
+}
+
+/* 深海模式 - 链接 */
+.dark .vp-doc a {
+  color: #6db3d8;
+  border-bottom-color: #6db3d8;
+}
+
+.dark .vp-doc a:hover {
+  color: #8ac8e8;
+  border-bottom-color: #8ac8e8;
+}
+
+/* 深海模式 - 表格 */
+.dark .vp-doc th {
+  background: #0e2440;
+  border-bottom-color: #d4915e;
+}
+
+.dark .vp-doc th,
+.dark .vp-doc td {
+  border-color: #1a3050;
+}
+
+.dark .vp-doc tr:nth-child(even) {
+  background: #102842;
+}
+
+/* 深海模式 - 引用块 */
+.dark .vp-doc blockquote {
+  border-left-color: #d4915e;
+  background: #0e2038;
+}
+
+/* 深海模式 - 图片 */
+.dark .vp-doc img {
+  box-shadow:
+    0 0 0 1px rgba(212, 145, 94, 0.15),
+    0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* 深海模式 - 侧边栏 */
+.dark .VPSidebar {
+  border-right-color: #1a3050;
+}
+
+/* 深海模式 - 导航栏 */
+.dark .VPNavBar {
+  border-bottom-color: #1a3050;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* 深海模式 - 文档页脚导航 */
+.dark .VPDocFooter {
+  border-top-color: #1a3050;
+}
+
+.dark .VPLink {
+  color: #6db3d8;
+}
+
+/* 深海模式 - 滚动条 */
+.dark ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #0a1830;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #1a3558;
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #2a5080;
+}
+
+/* ============================================
+ * 纸质风格效果组合预览
+ * 在 body 上添加 class 即可切换效果
+ * 例如：<body class="paper-lines">
+ * ============================================ */
+
+/* 横线笔记本效果 */
+body.paper-lines {
+  background-image:
+    repeating-linear-gradient(0deg,
+      transparent,
+      transparent 29px,
+      rgba(0, 0, 0, 0.05) 29px,
+      rgba(0, 0, 0, 0.05) 30px);
+}
+
+/* 纸张纹理效果 - 纹理间隔增大 */
+body.paper-texture {
+  background-color: #f8f5ef;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Crect width='8' height='8' fill='%23f8f5ef'/%3E%3Crect width='2' height='2' fill='%23ede8df'/%3E%3C/svg%3E");
+}
+
+/* 旧纸发黄效果 - 更明显的渐变 */
+body.paper-aged {
+  background: linear-gradient(135deg,
+      #f5f0e0 0%,
+      #ede5cc 20%,
+      #e8dbb8 40%,
+      #e0d0a8 60%,
+      #ede5cc 80%,
+      #f5f0e0 100%);
+}
+
+/* 水印效果 */
+body.paper-watermark {
+  background-color: #f8f5ef;
+  background-image:
+    repeating-linear-gradient(45deg,
+      transparent,
+      transparent 200px,
+      rgba(0, 0, 0, 0.02) 200px,
+      rgba(0, 0, 0, 0.02) 201px),
+    repeating-linear-gradient(-45deg,
+      transparent,
+      transparent 200px,
+      rgba(0, 0, 0, 0.02) 200px,
+      rgba(0, 0, 0, 0.02) 201px);
+}
+
+/* 全部效果组合 */
+body.paper-all {
+  background-color: #f8f5ef;
+  background-image:
+    /* 横线 */
+    repeating-linear-gradient(0deg,
+      transparent,
+      transparent 29px,
+      rgba(0, 0, 0, 0.03) 29px,
+      rgba(0, 0, 0, 0.03) 30px),
+    /* 斜线水印 */
+    repeating-linear-gradient(45deg,
+      transparent,
+      transparent 200px,
+      rgba(0, 0, 0, 0.015) 200px,
+      rgba(0, 0, 0, 0.015) 201px),
+    repeating-linear-gradient(-45deg,
+      transparent,
+      transparent 200px,
+      rgba(0, 0, 0, 0.015) 200px,
+      rgba(0, 0, 0, 0.015) 201px),
+    /* 纹理 */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='%23f8f5ef'/%3E%3Crect width='1' height='1' fill='%23f0ebe3'/%3E%3C/svg%3E");
+}
+
+/* ============================================
+ * 响应式
+ * ============================================ */
+
+@media (max-width: 768px) {
+  .vp-doc h1 {
+    font-size: 1.75rem;
+  }
+
+  .vp-doc h2 {
+    font-size: 1.3rem;
+  }
+
+  .vp-doc p {
+    text-indent: 0;
+  }
+
+  .vp-doc table {
+    display: block;
+    overflow-x: auto;
+  }
+}
+
+/* ============================================
+ * 打印样式
+ * ============================================ */
+
+@media print {
+
+  .VPNav,
+  .VPSidebar,
+  .VPFooter {
+    display: none !important;
+  }
+
+  .vp-doc {
+    font-size: 12pt;
+    line-height: 1.6;
+  }
+
+  .vp-doc a {
+    color: inherit;
+    border-bottom: none;
+  }
+}

@@ -1,39 +1,24 @@
 import { defineConfig } from 'vitepress'
 import { readdirSync, readFileSync } from 'fs'
-import { resolve, basename } from 'path'
+import { resolve } from 'path'
 
-// 自动扫描 guide 目录生成侧边栏
-// function generateGuideSidebar() {
-//   const guideDir = resolve(__dirname, '../guide')
-//   const files = readdirSync(guideDir)
-//     .filter(f => f.endsWith('.md') && f !== 'index.md')
-//     .sort()
+// ============================================
+// 方式1：子文件夹分类配置（posts、guides）
+// 适用于有子文件夹的目录
+// ============================================
 
-//   return files.map(f => {
-//     const name = f.replace('.md', '')
-//     // 从文件名生成可读标题
-//     const title = name
-//       .replace(/^day\d+-/, '')
-//       .replace(/-/g, ' ')
-//     return { text: title, link: `/guide/${name}` }
-//   })
-// }
-
-// 分类配置
+// posts 子分类映射
 const categoryMap: Record<string, string> = {
-  springboot: 'Spring Boot',
   springmvc: 'Spring MVC',
   frontend: '前端',
   vue: 'Vue',
   backend: '后端',
   linux: 'Linux',
   centos: 'CentOS',
-  database: '数据库',
-  devops: 'DevOps',
   arch: '架构',
 }
 
-// 扫描文章目录获取文章列表
+// 获取 posts 子分类下的文章列表
 function getPostsByCategory(category: string) {
   const postsDir = resolve(__dirname, '../posts', category)
   try {
@@ -53,13 +38,13 @@ function getPostsByCategory(category: string) {
   }
 }
 
-// 教程分类配置
+// guides 子分类映射
 const guidesCategoryMap: Record<string, string> = {
   'JavaWeb个人博客系统': 'JavaWeb 个人博客系统',
   '黑马前端教程': '黑马前端教程',
 }
 
-// 扫描教程目录获取文章列表
+// 获取 guides 子分类下的文章列表
 function getGuidesByCategory(category: string) {
   const guidesDir = resolve(__dirname, '../guides', category)
   try {
@@ -79,6 +64,42 @@ function getGuidesByCategory(category: string) {
   }
 }
 
+// ============================================
+// 方式2：独立分类配置（springboot、java 等）
+// 适用于只有文件、没有子文件夹的目录
+// ============================================
+
+// 独立分类映射
+const standaloneCategories: Record<string, string> = {
+  springboot: 'Spring Boot',
+  java: 'Java',
+  database: '数据库',
+  devops: 'DevOps',
+}
+
+// 获取独立分类下的文章列表
+function getStandalonePosts(category: string) {
+  const dir = resolve(__dirname, '../', category)
+  try {
+    const files = readdirSync(dir)
+      .filter(f => f.endsWith('.md') && f !== 'index.md')
+      .sort()
+
+    return files.map(f => {
+      const name = f.replace('.md', '')
+      const content = readFileSync(resolve(dir, f), 'utf-8')
+      const titleMatch = content.match(/^title:\s*(.+)$/m)
+      const title = titleMatch ? titleMatch[1].trim() : name
+      return { text: title, link: `/${category}/${name}` }
+    })
+  } catch {
+    return []
+  }
+}
+
+// ============================================
+// VitePress 主配置
+// ============================================
 
 export default defineConfig({
   title: '技术博客',
@@ -88,10 +109,37 @@ export default defineConfig({
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
     ['meta', { name: 'author', content: 'yangshuyin98' }],
+    ['style', {}, `
+      .dark .VPHome,
+      .dark .VPHomeHero,
+      .dark .VPFeatures,
+      .dark main,
+      .dark .VPContent,
+      .dark .VPContentContainer,
+      .dark .Layout,
+      .dark .VPNav,
+      .dark .VPNavBar,
+      .dark .VPSidebar {
+        background: transparent !important;
+        background-color: transparent !important;
+      }
+      .dark .VPHome * {
+        background-color: transparent !important;
+      }
+      .dark .VPFeature {
+        background: #122a48 !important;
+        border-color: #1e3a5c;
+      }
+      .dark .VPFeature:hover {
+        background: #1a3558 !important;
+      }
+    `],
   ],
 
   themeConfig: {
     logo: '/logo.svg',
+
+    // 导航栏配置
     nav: [
       { text: '首页', link: '/' },
       {
@@ -122,7 +170,9 @@ export default defineConfig({
       { text: '关于', link: '/about/' },
     ],
 
+    // 侧边栏配置
     sidebar: {
+      // --- guides 主页侧边栏 ---
       '/guides/': [
         {
           text: '教程分类',
@@ -132,7 +182,7 @@ export default defineConfig({
           })),
         },
       ],
-      // 为每个 guides 子分类生成侧边栏
+      // --- guides 子分类侧边栏 ---
       ...Object.fromEntries(
         Object.entries(guidesCategoryMap).map(([key, name]) => [
           `/guides/${key}/`,
@@ -150,6 +200,8 @@ export default defineConfig({
           ],
         ])
       ),
+
+      // --- posts 主页侧边栏 ---
       '/posts/': [
         {
           text: '文章分类',
@@ -159,7 +211,7 @@ export default defineConfig({
           })),
         },
       ],
-      // 为每个 posts 子分类生成侧边栏
+      // --- posts 子分类侧边栏 ---
       ...Object.fromEntries(
         Object.entries(categoryMap).map(([key, name]) => [
           `/posts/${key}/`,
@@ -177,39 +229,19 @@ export default defineConfig({
           ],
         ])
       ),
-      // 独立专题侧边栏
-      '/springboot/': [
-        {
-          text: 'Spring Boot',
-          items: [
-            { text: '全部文章', link: '/springboot/' },
+
+      // --- 独立分类侧边栏（方式2）---
+      ...Object.fromEntries(
+        Object.entries(standaloneCategories).map(([key, name]) => [
+          `/${key}/`,
+          [
+            {
+              text: name,
+              items: getStandalonePosts(key),
+            },
           ],
-        },
-      ],
-      '/java/': [
-        {
-          text: 'Java',
-          items: [
-            { text: '全部文章', link: '/java/' },
-          ],
-        },
-      ],
-      '/database/': [
-        {
-          text: '数据库',
-          items: [
-            { text: '全部文章', link: '/database/' },
-          ],
-        },
-      ],
-      '/devops/': [
-        {
-          text: 'DevOps',
-          items: [
-            { text: '全部文章', link: '/devops/' },
-          ],
-        },
-      ],
+        ])
+      ),
     },
 
     socialLinks: [
