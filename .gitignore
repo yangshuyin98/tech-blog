@@ -3,4 +3,7 @@ docs/.vitepress/dist/
 docs/.vitepress/.temp/
 docs/.vitepress/cache/
 .claude
+# 大字体文件（32MB，使用 CDN 加载）
+docs/public/fonts/*.ttf
+docs/public/fonts/*.otf
 

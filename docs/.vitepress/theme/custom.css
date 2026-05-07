@@ -9,21 +9,13 @@
  * 如需使用京華老宋体，请将字体文件放在 public/fonts/京華老宋体v3.0.ttf
  * ============================================ */
 
-@font-face {
-  font-family: '京華老宋体';
-  src: url('/fonts/京華老宋体v3.0.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
 /* ============================================
  * 亮色模式 - 纸质风格
  * ============================================ */
 
 :root {
-  /* 字体 - 优先京華老宋体，回退到系统宋体 */
-  --vp-font-family-base: '京華老宋体', 'Noto Serif SC', 'Source Han Serif SC',
+  /* 字体 - 使用系统宋体（京華老宋体 32MB 过大，移至 CDN 后可恢复） */
+  --vp-font-family-base: 'Noto Serif SC', 'Source Han Serif SC',
     'SimSun', '宋体', 'PingFang SC', 'Microsoft YaHei', serif;
   --vp-font-family-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code',
     Menlo, Monaco, Consolas, monospace;
