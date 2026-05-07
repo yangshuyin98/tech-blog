@@ -126,12 +126,20 @@ export default defineConfig({
       .dark .VPHome * {
         background-color: transparent !important;
       }
+      .dark .VPFlyout .menu,
+      .dark .VPMenu,
+      .dark .VPMenuGroup,
+      .dark .VPMenuLink {
+        background: #4a3628 !important;
+        background-color: #4a3628 !important;
+        border-color: #5a4435;
+      }
       .dark .VPFeature {
-        background: #122a48 !important;
-        border-color: #1e3a5c;
+        background: #4a3628 !important;
+        border-color: #5a4435;
       }
       .dark .VPFeature:hover {
-        background: #1a3558 !important;
+        background: #5a4435 !important;
       }
     `],
   ],

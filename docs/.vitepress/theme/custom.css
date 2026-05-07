@@ -242,56 +242,62 @@ body {
  * ============================================ */
 
 .dark {
-  /* 深海背景色 - 由深到浅的三层 */
-  --vp-c-bg: #0c1e36;
-  --vp-c-bg-soft: #122a48;
-  --vp-c-bg-mute: #1a3558;
+  /* 暖棕背景色 - 旧书页风格 */
+  --vp-c-bg: #3d2b1f;
+  --vp-c-bg-soft: #4a3628;
+  --vp-c-bg-mute: #2e2018;
 
-  /* 海洋文字色 - 柔和的蓝灰 */
-  --vp-c-text-1: #d8e8f5;
-  --vp-c-text-2: #a8c5db;
-  --vp-c-text-3: #7a9fba;
+  /* 暖棕文字色 - 米白 */
+  --vp-c-text-1: #f0e6d8;
+  --vp-c-text-2: #d8c8b0;
+  --vp-c-text-3: #b8a890;
 
-  /* 海洋品牌色 - 珊瑚暖色点缀 */
-  --vp-c-brand-1: #d4915e;
-  --vp-c-brand-2: #e0a575;
-  --vp-c-brand-3: #ecb98c;
+  /* 暖金品牌色 */
+  --vp-c-brand-1: #c49a6c;
+  --vp-c-brand-2: #d4aa7c;
+  --vp-c-brand-3: #e4ba8c;
 
-  /* 海洋分隔线 */
-  --vp-c-divider: #1e3a5c;
-  --vp-c-divider-light: #162e4a;
+  /* 暖棕分隔线 */
+  --vp-c-divider: #5a4435;
+  --vp-c-divider-light: #4a3828;
 
   /* 代码块 */
-  --vp-code-block-bg: #0a1a30;
-  --vp-code-line-num-color: #4a7a9a;
+  --vp-code-block-bg: #2a1e14;
+  --vp-code-line-num-color: #8a7a68;
 
   /* 侧边栏和导航栏 */
-  --vp-sidebar-bg-color: #0e2440;
-  --vp-nav-bg-color: #0c1e36;
+  --vp-sidebar-bg-color: #352820;
+  --vp-nav-bg-color: #3d2b1f;
 }
 
-/* 深海背景渐变 - 由深到浅 */
+/* 暖棕背景渐变 - 旧书页 + 纸质纹理 */
 .dark body {
-  background-color: #0c1e36;
+  background-color: #3d2b1f;
   background-image:
-    /* 海面光线效果 */
+    /* 旧纸张渐变 */
     linear-gradient(180deg,
-      #0a1830 0%,
-      #0e2440 30%,
-      #122a48 60%,
-      #0e2440 100%),
-    /* 细微波浪纹理 */
+      #3d2b1f 0%,
+      #4a3628 50%,
+      #3d2b1f 100%),
+    /* 横线纹理 - 笔记本横线 */
     repeating-linear-gradient(0deg,
       transparent,
-      transparent 60px,
-      rgba(30, 80, 140, 0.08) 60px,
-      rgba(30, 80, 140, 0.08) 62px),
-    /* 斜向水流纹理 */
-    repeating-linear-gradient(135deg,
+      transparent 78px,
+      rgba(255, 255, 255, 0.12) 78px,
+      rgba(255, 255, 255, 0.12) 80px),
+    /* 斜线水印纹理 */
+    repeating-linear-gradient(45deg,
       transparent,
-      transparent 120px,
-      rgba(30, 80, 140, 0.04) 120px,
-      rgba(30, 80, 140, 0.04) 121px);
+      transparent 200px,
+      rgba(255, 255, 255, 0.06) 200px,
+      rgba(255, 255, 255, 0.06) 201px),
+    repeating-linear-gradient(-45deg,
+      transparent,
+      transparent 200px,
+      rgba(255, 255, 255, 0.06) 200px,
+      rgba(255, 255, 255, 0.06) 201px),
+    /* 纹理 */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='%233d2b1f'/%3E%3Crect width='1' height='1' fill='%234a3628'/%3E%3C/svg%3E");
 }
 
 /* 深海模式 - 首页背景透明 */
@@ -323,129 +329,139 @@ body {
   background-color: transparent !important;
 }
 
-/* 深海模式 - 特性卡片 */
+/* 下拉菜单 - 不透明背景 */
+.dark .VPFlyout .menu,
+.dark .VPMenu,
+.dark .VPMenuGroup,
+.dark .VPMenuLink {
+  background: #4a3628 !important;
+  background-color: #4a3628 !important;
+  border-color: #5a4435;
+}
+
+/* 暖棕模式 - 特性卡片 */
 .dark .VPFeature {
-  background: #122a48 !important;
-  border-color: #1e3a5c;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  background: #4a3628 !important;
+  border-color: #5a4435;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
 }
 
 .dark .VPFeature:hover {
-  background: #1a3558 !important;
-  border-color: #2a5080;
+  background: #5a4435 !important;
+  border-color: #6a5445;
 }
 
-/* 深海模式 - 首页变量 */
+/* 暖棕模式 - 首页变量 */
 .dark {
   --vp-home-hero-background: transparent;
-  --vp-home-hero-name-color: #d4915e;
-  --vp-home-hero-text-color: #d8e8f5;
-  --vp-home-hero-tagline-color: #a8c5db;
+  --vp-home-hero-name-color: #c49a6c;
+  --vp-home-hero-text-color: #f0e6d8;
+  --vp-home-hero-tagline-color: #d8c8b0;
 }
 
-/* 深海模式 - 代码块 */
+/* 暖棕模式 - 代码块 */
 .dark .vp-doc div[class*='language-'] {
-  background: #081828;
-  border-color: #1a3050;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+  background: #2a1e14;
+  border-color: #3d2b1f;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .dark .vp-doc div[class*='language-'] code,
 .dark .vp-doc div[class*='language-'] pre {
-  color: #d0dde8;
+  color: #e8ddd0;
 }
 
-/* 深海模式 - 行内代码 */
+/* 暖棕模式 - 行内代码 */
 .dark .vp-doc :not(pre)>code {
-  background: #0e2440;
-  color: #6db3d8;
+  background: #352820;
+  color: #d4aa7c;
 }
 
-/* 深海模式 - 标题 */
+/* 暖棕模式 - 标题 */
 .dark .vp-doc h1 {
-  border-bottom-color: #d4915e;
+  border-bottom-color: #c49a6c;
 }
 
 .dark .vp-doc h2 {
-  border-bottom-color: #1e3a5c;
+  border-bottom-color: #5a4435;
 }
 
-/* 深海模式 - 链接 */
+/* 暖棕模式 - 链接 */
 .dark .vp-doc a {
-  color: #6db3d8;
-  border-bottom-color: #6db3d8;
+  color: #d4aa7c;
+  border-bottom-color: #d4aa7c;
 }
 
 .dark .vp-doc a:hover {
-  color: #8ac8e8;
-  border-bottom-color: #8ac8e8;
+  color: #e4ba8c;
+  border-bottom-color: #e4ba8c;
 }
 
-/* 深海模式 - 表格 */
+/* 暖棕模式 - 表格 */
 .dark .vp-doc th {
-  background: #0e2440;
-  border-bottom-color: #d4915e;
+  background: #352820;
+  border-bottom-color: #c49a6c;
 }
 
 .dark .vp-doc th,
 .dark .vp-doc td {
-  border-color: #1a3050;
+  border-color: #4a3628;
 }
 
 .dark .vp-doc tr:nth-child(even) {
-  background: #102842;
+  background: #3a2e22;
 }
 
-/* 深海模式 - 引用块 */
+/* 暖棕模式 - 引用块 */
 .dark .vp-doc blockquote {
-  border-left-color: #d4915e;
-  background: #0e2038;
+  border-left-color: #c49a6c;
+  background: #352820;
 }
 
-/* 深海模式 - 图片 */
+/* 暖棕模式 - 图片 */
 .dark .vp-doc img {
   box-shadow:
-    0 0 0 1px rgba(212, 145, 94, 0.15),
-    0 4px 16px rgba(0, 0, 0, 0.4);
+    0 0 0 1px rgba(196, 154, 108, 0.2),
+    0 4px 16px rgba(0, 0, 0, 0.25);
 }
 
-/* 深海模式 - 侧边栏 */
+/* 暖棕模式 - 侧边栏 */
 .dark .VPSidebar {
-  border-right-color: #1a3050;
+  border-right-color: #4a3628;
 }
 
-/* 深海模式 - 导航栏 */
+/* 暖棕模式 - 导航栏 */
 .dark .VPNavBar {
-  border-bottom-color: #1a3050;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  border-bottom-color: #4a3628;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
 }
 
-/* 深海模式 - 文档页脚导航 */
+/* 暖棕模式 - 文档页脚导航 */
 .dark .VPDocFooter {
-  border-top-color: #1a3050;
+  border-top-color: #4a3628;
 }
 
 .dark .VPLink {
-  color: #6db3d8;
+  color: #d4aa7c;
 }
 
-/* 深海模式 - 滚动条 */
+/* 暖棕模式 - 滚动条 */
 .dark ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
 .dark ::-webkit-scrollbar-track {
-  background: #0a1830;
+  background: #2e2018;
 }
 
 .dark ::-webkit-scrollbar-thumb {
-  background: #1a3558;
+  background: #5a4435;
   border-radius: 4px;
 }
 
 .dark ::-webkit-scrollbar-thumb:hover {
-  background: #2a5080;
+  background: #6a5445;
 }
 
 /* ============================================
