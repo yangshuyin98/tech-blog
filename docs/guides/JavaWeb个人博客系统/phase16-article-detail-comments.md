@@ -336,7 +336,7 @@ public class ArticleServlet extends HttpServlet {
                 <span>标签：<%= article.getTags() != null ? article.getTags() : "" %></span>
             </div>
             <div class="article-content">
-                <%= article.getContent() != null ? article.getContent().replace("\n", "<br>") : "" %>
+                <%= article.getContent() != null ? article.getContent().replace("/n", "<br>") : "" %>
             </div>
         </div>
 
@@ -415,10 +415,10 @@ POST → 302重定向 → GET → 显示页面 → 刷新 → 只是重新GET，
 ### 文章内容换行处理
 
 ```java
-article.getContent().replace("\n", "<br>")
+article.getContent().replace("/n", "<br>")
 ```
 
-数据库中存储的换行符是 `\n`，但 HTML 需要 `<br>` 才能换行显示。
+数据库中存储的换行符是 `/n`，但 HTML 需要 `<br>` 才能换行显示。
 
 ### 上一篇/下一篇的实现思路
 
