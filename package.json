@@ -18,5 +18,20 @@
   "dependencies": {
     "vitepress": "^1.6.4",
     "vue": "^3.5.30"
-  }
+  },
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yangshuyin98/tech-blog.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yangshuyin98/tech-blog/issues"
+  },
+  "homepage": "https://github.com/yangshuyin98/tech-blog#readme"
 }

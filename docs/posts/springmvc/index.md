@@ -1,0 +1,5 @@
+---
+title: Spring MVC
+---
+
+<PostList />

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, watch, nextTick } from 'vue'
 import { useRoute } from 'vitepress'
+// @ts-ignore: VitePress virtual module
 import { data as posts } from '../../posts.data'
 
 const route = useRoute()
@@ -9,7 +10,7 @@ const categoryMap: Record<string, string> = {
   springboot: 'Spring Boot',
   springmvc: 'Spring MVC',
   frontend: '前端',
-  vue: 'Vue',
+  vue: 'Vue',  
   backend: '后端',
   linux: 'Linux',
   centos: 'CentOS',
@@ -23,9 +24,16 @@ const categoryOrder = Object.keys(categoryMap)
 const currentCat = ref('')
 
 function updateCat() {
-  // 从 URL 直接读取，最可靠
-  const params = new URLSearchParams(window.location.search)
-  currentCat.value = params.get('cat') || ''
+  const path = window.location.pathname
+  // 从路径中提取分类，如 /posts/springboot/ -> springboot
+  const match = path.match(/\/posts\/(\w+)\/?$/)
+  if (match && categoryMap[match[1]]) {
+    currentCat.value = match[1]
+  } else {
+    // 兼容旧的查询参数方式 ?cat=xxx
+    const params = new URLSearchParams(window.location.search)
+    currentCat.value = params.get('cat') || ''
+  }
 }
 
 onMounted(() => {
@@ -71,24 +79,24 @@ const grouped = computed(() => {
   <div class="post-list">
     <template v-if="hasFilter">
       <h1>{{ currentCatName }} <Badge type="info" :text="`${filteredPosts.length} 篇`" /></h1>
-      <ul>
-        <li v-for="post in filteredPosts" :key="post.url">
-          <a :href="post.url">{{ post.title }}</a>
-          <span class="date">{{ post.date }}</span>
-        </li>
-      </ul>
+      <div class="post-items">
+        <a v-for="post in filteredPosts" :key="post.url" :href="post.url" class="post-item">
+          <div class="post-title">{{ post.title }}</div>
+          <div class="post-meta">{{ post.date }}</div>
+        </a>
+      </div>
     </template>
 
     <template v-else>
       <h1>全部文章 <Badge type="info" :text="`${posts.length} 篇`" /></h1>
       <div v-for="group in grouped" :key="group.key" class="category-group">
         <h2>{{ group.name }}</h2>
-        <ul>
-          <li v-for="post in group.posts" :key="post.url">
-            <a :href="post.url">{{ post.title }}</a>
-            <span class="date">{{ post.date }}</span>
-          </li>
-        </ul>
+        <div class="post-items">
+          <a v-for="post in group.posts" :key="post.url" :href="post.url" class="post-item">
+            <div class="post-title">{{ post.title }}</div>
+            <div class="post-meta">{{ post.date }}</div>
+          </a>
+        </div>
       </div>
     </template>
   </div>
@@ -97,10 +105,38 @@ const grouped = computed(() => {
 <style scoped>
 .post-list h1 { margin-bottom: 1.5rem; }
 .category-group { margin-bottom: 2rem; }
-.category-group h2 { border-bottom: 1px solid var(--vp-c-divider); padding-bottom: 0.5rem; }
-.post-list ul { list-style: none; padding: 0; }
-.post-list li { padding: 0.4rem 0; display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
-.post-list li a { flex: 1; font-weight: 500; }
-.post-list li a:hover { color: var(--vp-c-brand-1); }
-.date { font-size: 0.85rem; color: var(--vp-c-text-3); white-space: nowrap; }
+.category-group h2 { border-bottom: 1px solid var(--vp-c-divider); padding-bottom: 0.5rem; margin-bottom: 1rem; }
+
+.post-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.post-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.post-item:hover {
+  border-color: var(--vp-c-brand-1);
+  background: var(--vp-c-bg-soft);
+}
+
+.post-title {
+  font-weight: 600;
+  color: var(--vp-c-text-1);
+}
+
+.post-meta {
+  font-size: 0.85rem;
+  color: var(--vp-c-text-3);
+  white-space: nowrap;
+}
 </style>

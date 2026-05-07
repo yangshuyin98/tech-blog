@@ -124,7 +124,9 @@ npm run preview
 ```
 node_modules/
 docs/.vitepress/dist/
+docs/.vitepress/.temp/
 docs/.vitepress/cache/
+.claude
 .DS_Store
 *.log
 ```

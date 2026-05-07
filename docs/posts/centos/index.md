@@ -1,0 +1,5 @@
+---
+title: CentOS
+---
+
+<PostList />
